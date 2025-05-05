@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AuthorController;
 use App\Http\Controllers\CategoryController;
 use Illuminate\Support\Facades\Route;
 use Livewire\Volt\Volt;
@@ -18,8 +19,9 @@ Route::middleware(['auth'])->group(function () {
     Volt::route('settings/profile', 'settings.profile')->name('settings.profile');
     Volt::route('settings/password', 'settings.password')->name('settings.password');
     Volt::route('settings/appearance', 'settings.appearance')->name('settings.appearance');
-
     Route::resource('categories', CategoryController::class);
+    Route::resource('authors', AuthorController::class);
+
 });
 
 require __DIR__.'/auth.php';
