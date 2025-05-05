@@ -68,16 +68,18 @@ class CourseTypeController extends Controller
     public function update(Request $request, CoursesType $courseType)
     {
         $request->validate([
-            'name' => 'required|string|max:255|unique:course_types,name,' . $courseType->id,
+            'name' => 'required|string|max:255|unique:courses_types,name,' . $courseType->id,
             'category_id' => 'required|exists:categories,id',
         ]);
 
-        CoursesType::create([
+        $courseType->update([
             'name' => $request->name,
             'category_id' => $request->category_id,
         ]);
+
         return redirect()->route('courseTypes.index')->with('success', 'Course type updated successfully.');
     }
+
 
     /**
      * Remove the specified resource from storage.
