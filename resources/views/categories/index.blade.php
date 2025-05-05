@@ -27,7 +27,7 @@
             <tr class="bg-gray-100">
                 <th class="p-2">ID</th>
                 <th class="p-2">Name</th>
-                {{--                <th class="p-2">Slug</th>--}}
+                <th class="p-2">Slug</th>
                 <th class="p-2">Actions</th>
             </tr>
             </thead>
@@ -36,7 +36,7 @@
                 <tr class="border-t">
                     <td class="p-2 text-center">{{ $index + 1 }}</td>
                     <td class="p-2 text-center">{{ $category->name }}</td>
-                    {{--                    <td class="p-2">{{ $category->slug }}</td>--}}
+                    <td class="p-2">{{ $category->slug }}</td>
                     <td class="p-2 text-center" x-data="{ open: false }">
                         <!-- Edit Button -->
                         <a href="{{ route('categories.edit', $category) }}"

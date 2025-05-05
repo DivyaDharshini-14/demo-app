@@ -1,6 +1,6 @@
 <x-layouts.app :title="__('Category')">
     <div class="container">
-        <h2 class="text-xl font-bold mb-4">Create Category</h2>
+        <h2 class="text-xl font-bold mb-4">{{ isset($category) ? 'Edit' : 'Create' }} Category</h2>
 
         @if ($errors->any())
             <ul class="text-red-500 mb-4">
@@ -10,14 +10,37 @@
             </ul>
         @endif
 
-        <form action="{{ route('categories.store') }}" method="POST">
+        <form action="{{ isset($category) ? route('categories.update', $category) : route('categories.store') }}" method="POST">
             @csrf
+            @if(isset($category)) @method('PUT') @endif
 
             <label class="block mb-2">Category Name</label>
-            <input type="text" name="name" class="border p-2 w-full mb-4" value="{{ old('name') }}" required>
+            <input type="text" name="name" id="name" class="border p-2 w-full mb-4" value="{{ old('name', $category->name ?? '') }}" required>
 
-            <button type="submit" class="bg-green-500 text-white px-4 py-2 rounded">Create</button>
+            <label class="block mb-2">Slug</label>
+            <input readonly type="text" name="slug" id="slug" class="border p-2 w-full mb-4" value="{{ old('slug', $category->slug ?? '') }}">
+
+            <button type="submit" class="bg-green-500 text-white px-4 py-2 rounded">
+                {{ isset($category) ? 'Update' : 'Create' }}
+            </button>
             <a href="{{ route('categories.index') }}" class="ml-2 text-gray-700">Cancel</a>
         </form>
     </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const nameInput = document.getElementById('name');
+            const slugInput = document.getElementById('slug');
+
+            nameInput.addEventListener('input', function () {
+                const baseSlug = nameInput.value.trim().toLowerCase()
+                    .replace(/\s+/g, '-')
+                    .replace(/[^\w\-]+/g, '')
+                    .replace(/\-\-+/g, '-')
+                    .replace(/^-+|-+$/g, '');
+
+                slugInput.value = baseSlug ? `${baseSlug}-slug` : '';
+            });
+        });
+    </script>
 </x-layouts.app>

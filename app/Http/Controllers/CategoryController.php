@@ -26,16 +26,23 @@ class CategoryController extends Controller
     {
         $request->validate([
             'name' => 'required|string|max:255|unique:categories,name',
+            'slug' => 'nullable|string|max:255|unique:categories,slug',
         ]);
+
+        $slug = $request->slug ? Str::slug($request->slug) : Str::slug($request->name);
+        $slug .= ' ';
 
         Category::create([
             'name' => $request->name,
-            'slug' => Str::slug($request->name),
-            'user_id' => auth()->id(), // assuming user is logged in
+            'slug' => $slug,
+            'user_id' => auth()->id(),
         ]);
 
         return redirect()->route('categories.index')->with('success', 'Category created successfully.');
     }
+
+
+
 
     // Show single category (optional)
     public function show(Category $category)
@@ -54,15 +61,21 @@ class CategoryController extends Controller
     {
         $request->validate([
             'name' => 'required|string|max:255|unique:categories,name,' . $category->id,
+            'slug' => 'nullable|string|max:255|unique:categories,slug,' . $category->id,
         ]);
+
+        $slug = $request->slug ? Str::slug($request->slug) : Str::slug($request->name);
+        $slug .= ' ';
 
         $category->update([
             'name' => $request->name,
-            'slug' => Str::slug($request->name),
+            'slug' => $slug,
+            'user_id' => auth()->id(),
         ]);
 
         return redirect()->route('categories.index')->with('success', 'Category updated successfully.');
     }
+
 
     // Delete the category
     public function destroy(Category $category)
