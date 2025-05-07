@@ -30,9 +30,9 @@
             </tr>
             </thead>
             <tbody>
-            @foreach ($courseTypes as $courseType)
+            @foreach ($courseTypes as $index => $courseType)
                 <tr class="border-t">
-                    <td class="p-2 text-center">{{ $courseType->id }}</td>
+                    <td class="p-2 text-center">{{ $index+1 }}</td>
                     <td class="p-2 text-center">{{ $courseType->name }}</td>
                     <td class="p-2">{{ $courseType->slug }}</td>
                     <td class="p-2 text-center">{{ $courseType->category->name ?? 'N/A' }}</td>

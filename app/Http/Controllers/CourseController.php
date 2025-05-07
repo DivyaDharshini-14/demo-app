@@ -40,20 +40,23 @@ class CourseController extends Controller
             'category_id' => 'required|exists:categories,id',
             'course_type_id' => 'required|exists:courses_types,id',
             'name' => 'nullable|required|string|max:255',
+            'slug' => 'nullable|string|max:255|unique:courses,slug',
             'description' => 'nullable|required|string',
             'thumbnail' => 'nullable|required|image',
-            'video' => 'nullable|required|url',
+            'video' => 'nullable|url',
             'author_id' => 'required|exists:users,id',
             'user_id' => 'required|exists:users,id',
         ]);
 
+        $slug = $request->slug ? Str::slug($request->slug) : Str::slug($request->name);
+        $slug .= ' ';
         $thumbnailPath = $request->file('thumbnail')->store('thumbnails', 'public');
 
         Courses::create([
             'category_id' => $request->category_id,
             'course_type_id' => $request->course_type_id,
             'name' => $request->name,
-            'slug' => Str::slug($request->name),
+            'slug' => $slug,
             'description' => $request->description,
             'thumbnail' => $thumbnailPath,
             'video' => $request->video,
@@ -92,9 +95,10 @@ class CourseController extends Controller
             'category_id' => 'required|exists:categories,id',
             'course_type_id' => 'required|exists:courses_types,id',
             'name' => 'required|string|max:255',
+            'slug' => 'nullable|string|max:255|unique:courses,slug',
             'description' => 'required|string',
             'thumbnail' => 'nullable|image',
-            'video' => 'nullable|required|url',
+            'video' => 'nullable|url',
             'author_id' => 'required|exists:users,id',
             'user_id' => 'required|exists:users,id',
         ]);
@@ -104,12 +108,14 @@ class CourseController extends Controller
         } else {
             $thumbnailPath = $course->thumbnail;
         }
+        $slug = $request->slug ? Str::slug($request->slug) : Str::slug($request->name);
+        $slug .= ' ';
 
         $course->update([
             'category_id' => $request->category_id,
             'course_type_id' => $request->course_type_id,
             'name' => $request->name,
-            'slug' => Str::slug($request->name),
+            'slug' => $slug,
             'description' => $request->description,
             'thumbnail' => $thumbnailPath,
             'video' => $request->video,

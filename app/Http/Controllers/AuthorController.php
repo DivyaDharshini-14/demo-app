@@ -32,11 +32,15 @@ class AuthorController extends Controller
     {
         $request->validate([
             'name' => 'required|string|max:255|unique:authors,name',
+            'slug' => 'nullable|string|max:255|unique:authors,slug',
         ]);
+
+        $slug = $request->slug ? Str::slug($request->slug) : Str::slug($request->name);
+        $slug .= ' ';
 
         Author::create([
             'name' => $request->name,
-//            'slug' => Str::slug($request->name),
+            'slug' => $slug,
 //            'user_id' => auth()->id(), // assuming user is logged in
         ]);
 
@@ -65,11 +69,15 @@ class AuthorController extends Controller
     {
         $request->validate([
             'name' => 'required|string|max:255|unique:categories,name,' . $author->id,
+            'slug' => 'nullable|string|max:255|unique:authors,slug,'. $author->id,
         ]);
+
+        $slug = $request->slug ? Str::slug($request->slug) : Str::slug($request->name);
+        $slug .= ' ';
 
         $author->update([
             'name' => $request->name,
-//            'slug' => Str::slug($request->name),
+            'slug' => $slug,
         ]);
 
         return redirect()->route('authors.index')->with('success', 'Category updated successfully.');

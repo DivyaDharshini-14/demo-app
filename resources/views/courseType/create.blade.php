@@ -14,7 +14,7 @@
             @csrf
 
             <label class="block mb-2">Course Type Name</label>
-            <input type="text" name="name" class="border p-2 w-full mb-4" value="{{ old('name') }}" required>
+            <input type="text" name="name" id="name" class="border p-2 w-full mb-4" value="{{ old('name', $courseType->name ?? '') }}" required>
 
             <label class="block mb-2">Slug</label>
             <input readonly type="text" name="slug" id="slug" class="border p-2 w-full mb-4" value="{{ old('slug', $courseType->slug ?? '') }}">
