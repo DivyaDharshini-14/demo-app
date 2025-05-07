@@ -38,7 +38,7 @@
                         <a href="{{ route('courseTypes.edit', $courseType) }}" class="text-blue-600">Edit</a>
                         <form action="{{ route('courseTypes.destroy', $courseType) }}" method="POST" class="inline">
                             @csrf @method('DELETE')
-                            <button type="submit" onclick="return confirm('Delete this course type?')" class="text-red-600 ml-2">Delete</button>
+                            <button type="submit" onclick="return confirm('Delete this courses type?')" class="text-red-600 ml-2">Delete</button>
                         </form>
                     </td>
                 </tr>
