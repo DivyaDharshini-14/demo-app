@@ -17,6 +17,10 @@
             <label class="block mb-2">Course Type Name</label>
             <input type="text" name="name" class="border p-2 w-full mb-4" value="{{ old('name', $courseType->name) }}" required>
 
+            <label class="block mb-1 font-semibold">Slug</label>
+            <input readonly type="text" name="slug" id="slug" class="border p-2 w-full rounded"
+                   value="{{ old('slug', $courseType->slug) }}">
+
             <label class="block mb-2">Category</label>
             <select name="category_id" class="border p-2 w-full mb-4" required>
                 <option value="">Select Category</option>

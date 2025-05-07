@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Category;
 use App\Models\CoursesType;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 class CourseTypeController extends Controller
 {
@@ -33,12 +34,17 @@ class CourseTypeController extends Controller
     {
         $request->validate([
             'name' => 'required|string|max:255|unique:courses_types,name',
+            'slug' => 'nullable|string|max:255|unique:courses_types,slug',
             'category_id' => 'required|exists:categories,id',
         ]);
+
+        $slug = $request->slug ? Str::slug($request->slug) : Str::slug($request->name);
+        $slug .= ' ';
 
         CoursesType::create([
             'name' => $request->name,
             'category_id' => $request->category_id,
+            'slug' => $slug,
             // 'slug' => Str::slug($request->name),
         ]);
 
@@ -70,10 +76,16 @@ class CourseTypeController extends Controller
         $request->validate([
             'name' => 'required|string|max:255|unique:courses_types,name,' . $courseType->id,
             'category_id' => 'required|exists:categories,id',
+            'slug' => 'nullable|string|max:255|unique:courses_types,slug,' . $courseType->id,
         ]);
+
+        $slug = $request->slug ? Str::slug($request->slug) : Str::slug($request->name);
+        $slug .= ' ';
 
         $courseType->update([
             'name' => $request->name,
+            'slug' => $slug,
+//            'slug' => Str::slug($request->name),
             'category_id' => $request->category_id,
         ]);
 

@@ -24,6 +24,7 @@
             <tr class="bg-gray-100">
                 <th class="p-2">ID</th>
                 <th class="p-2">Name</th>
+                <th class="p-2">Slug</th>
                 <th class="p-2">Category</th>
                 <th class="p-2">Actions</th>
             </tr>
@@ -33,6 +34,7 @@
                 <tr class="border-t">
                     <td class="p-2 text-center">{{ $courseType->id }}</td>
                     <td class="p-2 text-center">{{ $courseType->name }}</td>
+                    <td class="p-2">{{ $courseType->slug }}</td>
                     <td class="p-2 text-center">{{ $courseType->category->name ?? 'N/A' }}</td>
                     <td class="p-2 text-center">
                         <a href="{{ route('courseTypes.edit', $courseType) }}" class="text-blue-600">Edit</a>
