@@ -50,7 +50,7 @@
             @endif
 
             <label class="block mb-2">Video URL</label>
-            <input type="url" name="video" class="border p-2 w-full mb-4" value="{{ old('video', $course->video ?? '') }}" required>
+            <input type="url" name="video" class="border p-2 w-full mb-4" value="{{ old('video', $course->video ?? '') }}">
 
             <label class="block mb-2">Author</label>
             <select name="author_id" class="border p-2 w-full mb-4" required>
