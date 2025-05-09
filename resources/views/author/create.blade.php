@@ -13,8 +13,7 @@
         <form action="{{ route('authors.store') }}" method="POST">
             @csrf
 
-{{--            <label class="block mb-2">authors Name</label>--}}
-{{--            <input type="text" name="name" class="border p-2 w-full mb-4" value="{{ old('name') }}" required>--}}
+            @if(isset($author)) @method('PUT') @endif
 
             <label class="block mb-2">Author Name</label>
             <input type="text" name="name" id="name" class="border p-2 w-full mb-4" value="{{ old('name', $author->name ?? '') }}" required>
