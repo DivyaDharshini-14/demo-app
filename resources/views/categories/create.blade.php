@@ -1,5 +1,6 @@
 <x-layouts.app :title="__('Category')">
     <div class="container">
+
         <h2 class="text-xl font-bold mb-4">{{ isset($category) ? 'Edit' : 'Create' }} Category</h2>
 
         @if ($errors->any())

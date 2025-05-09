@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\TodoController;
 use App\Http\Controllers\AuthorController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CourseController;
@@ -25,6 +26,9 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('authors', AuthorController::class);
     Route::resource('courseTypes', CourseTypeController::class);
     Route::resource('courses', CourseController::class);
+
+    Route::get('/todos', [TodoController::class, 'index']);
+
 
 });
 

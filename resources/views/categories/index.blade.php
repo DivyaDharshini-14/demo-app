@@ -21,7 +21,6 @@
             </div>
         @endif
 
-
         <table class="w-full mt-4 border">
             <thead>
             <tr class="bg-gray-100">
@@ -43,13 +42,11 @@
                            class="text-white px-2 py-1 rounded bg-gradient-to-l from-blue-700 to-sky-500 text-xs">
                             Edit
                         </a>
-
                         <!-- Delete Button (opens modal) -->
                         <button @click="open = true"
                                 class="ml-2 text-white px-2 py-1 rounded bg-gradient-to-l from-red-500 to-orange-700 text-xs">
                             Delete
                         </button>
-
                         <!-- Modal -->
                         <div x-show="open"
                              x-cloak
@@ -73,7 +70,6 @@
                             </div>
                         </div>
                     </td>
-
                 </tr>
             @endforeach
             </tbody>
