@@ -25,21 +25,23 @@
             <tr class="bg-gray-100">
                 <th class="p-2">ID</th>
                 <th class="p-2">Name</th>
-                {{--                <th class="p-2">Slug</th>--}}
+                <th class="p-2">Slug</th>
                 <th class="p-2">Actions</th>
             </tr>
             </thead>
             <tbody>
-            @foreach ($authors as $author)
+            @foreach ($authors as $index => $author)
                 <tr class="border-t">
-                    <td class="p-2 text-center">{{ $author->id }}</td>
+                    <td class="p-2 text-center">{{ $index + 1 }}</td>
                     <td class="p-2 text-center">{{ $author->name }}</td>
-                    {{--                    <td class="p-2">{{ $category->slug }}</td>--}}
+                    <td class="p-2">{{ $author->slug }}</td>
                     <td class="p-2 text-center">
                         <a href="{{ route('authors.edit', $author) }}" class="text-blue-600">Edit</a>
                         <form action="{{ route('authors.destroy', $author) }}" method="POST" class="inline">
                             @csrf @method('DELETE')
-                            <button type="submit" onclick="return confirm('Delete this category?')" class="text-red-600 ml-2">Delete</button>
+                            <button type="submit" onclick="return confirm('Delete this category?')"
+                                    class="text-red-600 ml-2">Delete
+                            </button>
                         </form>
                     </td>
                 </tr>

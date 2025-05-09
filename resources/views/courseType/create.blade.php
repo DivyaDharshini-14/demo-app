@@ -14,7 +14,10 @@
             @csrf
 
             <label class="block mb-2">Course Type Name</label>
-            <input type="text" name="name" class="border p-2 w-full mb-4" value="{{ old('name') }}" required>
+            <input type="text" name="name" id="name" class="border p-2 w-full mb-4" value="{{ old('name', $courseType->name ?? '') }}" required>
+
+            <label class="block mb-2">Slug</label>
+            <input readonly type="text" name="slug" id="slug" class="border p-2 w-full mb-4" value="{{ old('slug', $courseType->slug ?? '') }}">
 
             <label class="block mb-2">Category</label>
             <select name="category_id" class="border p-2 w-full mb-4" required>
@@ -30,5 +33,22 @@
             <a href="{{ route('courseTypes.index') }}" class="ml-2 text-gray-700">Cancel</a>
         </form>
     </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const nameInput = document.getElementById('name');
+            const slugInput = document.getElementById('slug');
+
+            nameInput.addEventListener('input', function () {
+                const baseSlug = nameInput.value.trim().toLowerCase()
+                    .replace(/\s+/g, '-')
+                    .replace(/[^\w\-]+/g, '')
+                    .replace(/\-\-+/g, '-')
+                    .replace(/^-+|-+$/g, '');
+
+                slugInput.value = baseSlug ? `${baseSlug}-slug` : '';
+            });
+        });
+    </script>
 </x-layouts.app>
 

@@ -17,6 +17,7 @@
                     <flux:navlist.item icon="folder" :href="route('categories.index')" :current="request()->routeIs('categories.index')" wire:navigate>{{ __('Category') }}</flux:navlist.item>
                     <flux:navlist.item icon="folder" :href="route('authors.index')" :current="request()->routeIs('authors.index')" wire:navigate>{{ __('Author') }}</flux:navlist.item>
                     <flux:navlist.item icon="folder" :href="route('courseTypes.index')" :current="request()->routeIs('courseTypes.index')" wire:navigate>{{ __('Course Type') }}</flux:navlist.item>
+                    <flux:navlist.item icon="folder" :href="route('courses.index')" :current="request()->routeIs('courses.index')" wire:navigate>{{ __('Courses') }}</flux:navlist.item>
                 </flux:navlist.group>
             </flux:navlist>
 

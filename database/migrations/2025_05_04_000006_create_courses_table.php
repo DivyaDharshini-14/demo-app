@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('slug')->unique();
             $table->text('description');
             $table->string('thumbnail');
-            $table->string('video');
+            $table->string('video')->nullable();
             $table->foreignId('author_id')->constrained('users');
             $table->foreignId('user_id')->constrained('users');
             $table->timestamps();
