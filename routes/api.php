@@ -14,5 +14,5 @@ Route::get('/user', function (Request $request) {
 
 Route::apiResource('categories', CategoryController::class);
 Route::apiResource('authors', AuthorController::class);
-Route::apiResource('courseTypes/{id}', CourseTypeController::class);
+Route::apiResource('courseTypes', CourseTypeController::class);
 Route::apiResource('courses', CourseController::class);
